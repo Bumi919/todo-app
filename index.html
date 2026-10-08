@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📝 To-Do List</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1>📝 To-Do List</h1>
+      <p class="subtitle">Kelola tugas harianmu</p>
+    </header>
+
+    <form id="todo-form" class="input-row" autocomplete="off">
+      <input
+        type="text"
+        id="todo-input"
+        placeholder="Tambahkan tugas baru..."
+        maxlength="200"
+        required
+        aria-label="Tugas baru"
+      >
+      <button type="submit" aria-label="Tambah tugas">+ Tambah</button>
+    </form>
+
+    <nav class="filters" role="tablist" aria-label="Filter tugas">
+      <button class="filter active" data-filter="all">Semua</button>
+      <button class="filter" data-filter="active">Aktif</button>
+      <button class="filter" data-filter="done">Selesai</button>
+    </nav>
+
+    <ul id="todo-list" class="todo-list"></ul>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <span>🎉</span>
+      <p>Belum ada tugas. Tambahkan yang pertama!</p>
+    </div>
+
+    <footer class="footer">
+      <span id="counter">0 tugas tersisa</span>
+      <button id="clear-done" class="link-btn">Hapus yang selesai</button>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
