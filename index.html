@@ -3,15 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aplikasi to-do list modern — kelola tugas harianmu dengan cepat, ringan, dan tersimpan otomatis.">
+  <meta name="theme-color" content="#0f172a">
   <title>📝 To-Do List</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Terapkan tema sebelum render untuk menghindari FOUC
+    (function () {
+      var saved = localStorage.getItem("todo-app-theme");
+      var system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = saved || system;
+    })();
+  </script>
 </head>
 <body>
   <main class="card">
-    <header>
-      <h1>📝 To-Do List</h1>
-      <p class="subtitle">Kelola tugas harianmu</p>
-    </header>
+    <div class="head-row">
+      <header>
+        <h1>📝 To-Do List</h1>
+        <p class="subtitle">Kelola tugas harianmu</p>
+      </header>
+      <button
+        id="theme-toggle"
+        class="icon-btn"
+        type="button"
+        aria-label="Ganti tema terang/gelap"
+        title="Ganti tema"
+      ></button>
+    </div>
 
     <form id="todo-form" class="input-row" autocomplete="off">
       <input
@@ -25,22 +45,22 @@
       <button type="submit" aria-label="Tambah tugas">+ Tambah</button>
     </form>
 
-    <nav class="filters" role="tablist" aria-label="Filter tugas">
-      <button class="filter active" data-filter="all">Semua</button>
-      <button class="filter" data-filter="active">Aktif</button>
-      <button class="filter" data-filter="done">Selesai</button>
+    <nav class="filters" aria-label="Filter tugas">
+      <button class="filter active" data-filter="all" aria-pressed="true">Semua</button>
+      <button class="filter" data-filter="active" aria-pressed="false">Aktif</button>
+      <button class="filter" data-filter="done" aria-pressed="false">Selesai</button>
     </nav>
 
     <ul id="todo-list" class="todo-list"></ul>
 
     <div id="empty-state" class="empty-state" hidden>
-      <span>🎉</span>
-      <p>Belum ada tugas. Tambahkan yang pertama!</p>
+      <span aria-hidden="true">🎉</span>
+      <p id="empty-message">Belum ada tugas. Tambahkan yang pertama!</p>
     </div>
 
     <footer class="footer">
-      <span id="counter">0 tugas tersisa</span>
-      <button id="clear-done" class="link-btn">Hapus yang selesai</button>
+      <span id="counter" aria-live="polite">0 tugas tersisa</span>
+      <button id="clear-done" class="link-btn" disabled>Hapus yang selesai</button>
     </footer>
   </main>
 
